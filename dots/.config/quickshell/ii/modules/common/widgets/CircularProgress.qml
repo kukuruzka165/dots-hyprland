@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Shapes
+import QtQuick.Window
 import qs.modules.common
 
 /**
@@ -52,6 +53,7 @@ Item {
         anchors.fill: parent
         layer.enabled: true
         layer.smooth: true
+        layer.textureSize: Qt.size(width * Screen.devicePixelRatio, height * Screen.devicePixelRatio)
         preferredRendererType: Shape.CurveRenderer
         ShapePath {
             id: secondaryPath

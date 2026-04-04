@@ -3,6 +3,7 @@ import qs.modules.common
 import qs.modules.common.widgets
 import QtQuick
 import QtQuick.Effects
+import QtQuick.Window
 
 Canvas { // Visualizer
     id: root
@@ -63,6 +64,7 @@ Canvas { // Visualizer
     }
 
     layer.enabled: true
+    layer.textureSize: Qt.size(width * Screen.devicePixelRatio, height * Screen.devicePixelRatio)
     layer.effect: MultiEffect { // Blur a bit to obscure away the points
         source: root
         saturation: 0.2

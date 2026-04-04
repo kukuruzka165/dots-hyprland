@@ -104,46 +104,51 @@ Item { // Player instance
         color: ColorUtils.applyAlpha(blendedColors.colLayer0, 1)
         radius: root.radius
 
-        layer.enabled: true
-        layer.effect: OpacityMask {
-            maskSource: Rectangle {
-                width: background.width
-                height: background.height
-                radius: background.radius
-            }
-        }
-
-        Image {
-            id: blurredArt
+        Item {
+            id: backgroundVisuals
             anchors.fill: parent
-            source: root.displayedArtFilePath
-            sourceSize.width: background.width
-            sourceSize.height: background.height
-            fillMode: Image.PreserveAspectCrop
-            cache: false
-            antialiasing: true
-            asynchronous: true
-
             layer.enabled: true
-            layer.effect: StyledBlurEffect {
-                source: blurredArt
+            layer.smooth: true
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    width: backgroundVisuals.width
+                    height: backgroundVisuals.height
+                    radius: background.radius
+                }
             }
 
-            Rectangle {
+            Image {
+                id: blurredArt
                 anchors.fill: parent
-                color: ColorUtils.transparentize(blendedColors.colLayer0, 0.3)
-                radius: root.radius
-            }
-        }
+                source: root.displayedArtFilePath
+                sourceSize.width: background.width
+                sourceSize.height: background.height
+                fillMode: Image.PreserveAspectCrop
+                cache: false
+                antialiasing: true
+                asynchronous: true
 
-        WaveVisualizer {
-            id: visualizerCanvas
-            anchors.fill: parent
-            live: root.player?.isPlaying
-            points: root.visualizerPoints
-            maxVisualizerValue: root.maxVisualizerValue
-            smoothing: root.visualizerSmoothing
-            color: blendedColors.colPrimary
+                layer.enabled: true
+                layer.effect: StyledBlurEffect {
+                    source: blurredArt
+                }
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: ColorUtils.transparentize(blendedColors.colLayer0, 0.3)
+                    radius: root.radius
+                }
+            }
+
+            WaveVisualizer {
+                id: visualizerCanvas
+                anchors.fill: parent
+                live: root.player?.isPlaying
+                points: root.visualizerPoints
+                maxVisualizerValue: root.maxVisualizerValue
+                smoothing: root.visualizerSmoothing
+                color: blendedColors.colPrimary
+            }
         }
 
         RowLayout {

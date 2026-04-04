@@ -34,6 +34,18 @@ StyledOverlayWidget {
             "history": ResourceUsage.swapUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableSwapString
         },
+        {
+            "icon": "storage",
+            "name": Translation.tr("Disk"),
+            "history": ResourceUsage.diskUsageHistory,
+            "maxAvailableString": ResourceUsage.maxAvailableDiskString
+        },
+        {
+            "icon": "network_check",
+            "name": Translation.tr("Network"),
+            "history": ResourceUsage.networkUsageHistory,
+            "maxAvailableString": ResourceUsage.maxAvailableNetworkString
+        },
     ]
 
     contentItem: OverlayBackground {

@@ -2,6 +2,7 @@ import qs.modules.common
 import qs.modules.common.functions
 import QtQuick
 import QtQuick.Shapes
+import QtQuick.Window
 import Qt5Compat.GraphicalEffects
 
 Item {
@@ -56,6 +57,7 @@ Item {
         visible: false
         layer.enabled: true
         layer.smooth: true
+        layer.textureSize: Qt.size(width * Screen.devicePixelRatio, height * Screen.devicePixelRatio)
 
         Shape {
             anchors.fill: parent
