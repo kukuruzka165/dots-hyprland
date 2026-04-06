@@ -14,7 +14,7 @@ Singleton {
 	property real memoryTotal: 1
 	property real memoryFree: 0
 	property real memoryUsed: memoryTotal - memoryFree
-    property real memoryUsedPercentage: memoryUsed / memoryTotal
+    property real memoryUsedPercentage: memoryTotal > 0 ? (memoryUsed / memoryTotal) : 0
     property real swapTotal: 1
 	property real swapFree: 0
 	property real swapUsed: swapTotal - swapFree
@@ -49,6 +49,10 @@ Singleton {
     property list<real> swapUsageHistory: []
     property list<real> diskUsageHistory: []
     property list<real> networkUsageHistory: []
+    property list<real> diskReadRateHistory: []
+    property list<real> diskWriteRateHistory: []
+    property list<real> networkDownRateHistory: []
+    property list<real> networkUpRateHistory: []
 
     function kbToGbString(kb) {
         return (kb / (1024 * 1024)).toFixed(1) + " GB";
@@ -91,12 +95,26 @@ Singleton {
             networkUsageHistory.shift()
         }
     }
+    function updateDiskRateHistories() {
+        diskReadRateHistory = [...diskReadRateHistory, diskReadRate]
+        if (diskReadRateHistory.length > historyLength) diskReadRateHistory.shift()
+        diskWriteRateHistory = [...diskWriteRateHistory, diskWriteRate]
+        if (diskWriteRateHistory.length > historyLength) diskWriteRateHistory.shift()
+    }
+    function updateNetworkRateHistories() {
+        networkDownRateHistory = [...networkDownRateHistory, networkDownRate]
+        if (networkDownRateHistory.length > historyLength) networkDownRateHistory.shift()
+        networkUpRateHistory = [...networkUpRateHistory, networkUpRate]
+        if (networkUpRateHistory.length > historyLength) networkUpRateHistory.shift()
+    }
     function updateHistories() {
         updateMemoryUsageHistory()
         updateSwapUsageHistory()
         updateCpuUsageHistory()
         updateDiskUsageHistory()
         updateNetworkUsageHistory()
+        updateDiskRateHistories()
+        updateNetworkRateHistories()
     }
 
 	Timer {
