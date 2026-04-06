@@ -48,28 +48,13 @@ Item {
         spacing: 4
         anchors.fill: parent
 
-        ClippedFilledCircularProgress {
-            id: mediaCircProg
+        MaterialSymbol {
             Layout.alignment: Qt.AlignVCenter
-            lineWidth: Appearance.rounding.unsharpen
-            value: activePlayer?.position / activePlayer?.length
-            implicitSize: 20
-            colPrimary: Appearance.colors.colOnSecondaryContainer
-            enableAnimation: false
-
-            Item {
-                anchors.centerIn: parent
-                width: mediaCircProg.implicitSize
-                height: mediaCircProg.implicitSize
-                
-                MaterialSymbol {
-                    anchors.centerIn: parent
-                    fill: 1
-                    text: activePlayer?.isPlaying ? "pause" : "music_note"
-                    iconSize: Appearance.font.pixelSize.normal
-                    color: Appearance.m3colors.m3onSecondaryContainer
-                }
-            }
+            horizontalAlignment: Qt.AlignHCenter
+            fill: 1
+            text: activePlayer?.isPlaying ? "pause" : "music_note"
+            iconSize: Appearance.font.pixelSize.large
+            color: Appearance.colors.colOnLayer2
         }
 
         StyledText {
@@ -80,7 +65,7 @@ Item {
             Layout.rightMargin: rowLayout.spacing
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight // Truncates the text on the right
-            color: Appearance.colors.colOnLayer1
+            color: Appearance.colors.colOnLayer2
             text: `${cleanedTitle}${activePlayer?.trackArtist ? ' • ' + activePlayer.trackArtist : ''}`
         }
 

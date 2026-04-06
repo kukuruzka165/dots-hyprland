@@ -274,6 +274,8 @@ Item {
 
                             source: workspaceButtonBackground.mainAppIconSource
                             implicitSize: (!root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? workspaceIconSize : workspaceIconSizeShrinked
+                            mipmap: true
+                            backer.sourceSize: Qt.size(48, 48)
 
                             Behavior on opacity {
                                 animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)

@@ -14,7 +14,7 @@ MouseArea {
     RowLayout {
         id: rowLayout
 
-        spacing: 0
+        spacing: 8
         anchors.fill: parent
         anchors.leftMargin: 4
         anchors.rightMargin: 4
@@ -31,7 +31,6 @@ MouseArea {
             shown: Config.options.bar.resources.alwaysShowCpu ||
                 !(MprisController.activePlayer?.trackTitle?.length > 0) ||
                 root.alwaysShowAllResources
-            Layout.leftMargin: shown ? 6 : 0
             warningThreshold: Config.options.bar.resources.cpuWarningThreshold
         }
 

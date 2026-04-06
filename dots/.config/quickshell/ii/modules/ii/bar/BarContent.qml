@@ -116,11 +116,13 @@ Item { // Bar content region
             Resources {
                 alwaysShowAllResources: root.useShortenedForm === 2
                 Layout.fillWidth: root.useShortenedForm === 2
+                Layout.alignment: Qt.AlignVCenter
             }
 
             Media {
                 visible: root.useShortenedForm < 2
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
             }
         }
 
@@ -167,6 +169,13 @@ Item { // Bar content region
             BarGroup {
                 id: rightCenterGroupContent
                 anchors.fill: parent
+
+                ScreenShareIndicator {
+                    visible: Privacy.screenSharing
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.leftMargin: 4
+                    Layout.rightMargin: 4
+                }
 
                 ClockWidget {
                     showDate: (Config.options.bar.verbose && root.useShortenedForm < 2)

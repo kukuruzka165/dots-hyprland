@@ -20,52 +20,32 @@ Item {
         spacing: 2
         x: shown ? 0 : -resourceRowLayout.width
         anchors {
-            verticalCenter: parent.verticalCenter
+            top: parent.top
+            bottom: parent.bottom
         }
 
-        ClippedFilledCircularProgress {
-            id: resourceCircProg
+        MaterialSymbol {
             Layout.alignment: Qt.AlignVCenter
-            lineWidth: Appearance.rounding.unsharpen
-            value: percentage
-            implicitSize: 20
-            colPrimary: root.warning ? Appearance.colors.colError : Appearance.colors.colOnSecondaryContainer
-            accountForLightBleeding: !root.warning
-            enableAnimation: false
-
-            Item {
-                anchors.centerIn: parent
-                width: resourceCircProg.implicitSize
-                height: resourceCircProg.implicitSize
-                
-                MaterialSymbol {
-                    anchors.centerIn: parent
-                    font.weight: Font.DemiBold
-                    fill: 1
-                    text: iconName
-                    iconSize: Appearance.font.pixelSize.normal
-                    color: Appearance.m3colors.m3onSecondaryContainer
-                }
-            }
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            fill: 1
+            text: iconName
+            iconSize: Appearance.font.pixelSize.large
+            color: root.warning ? Appearance.colors.colError : Appearance.colors.colOnLayer2
         }
 
-        Item {
+        StyledText {
             Layout.alignment: Qt.AlignVCenter
-            implicitWidth: fullPercentageTextMetrics.width
-            implicitHeight: percentageText.implicitHeight
+            Layout.preferredWidth: fullPercentageTextMetrics.width
+            horizontalAlignment: Text.AlignHCenter
+            color: Appearance.colors.colOnLayer2
+            font.pixelSize: Appearance.font.pixelSize.small
+            text: `${Math.round(percentage * 100).toString()}`
 
             TextMetrics {
                 id: fullPercentageTextMetrics
                 text: "100"
                 font.pixelSize: Appearance.font.pixelSize.small
-            }
-
-            StyledText {
-                id: percentageText
-                anchors.centerIn: parent
-                color: Appearance.colors.colOnLayer1
-                font.pixelSize: Appearance.font.pixelSize.small
-                text: `${Math.round(percentage * 100).toString()}`
             }
         }
 
